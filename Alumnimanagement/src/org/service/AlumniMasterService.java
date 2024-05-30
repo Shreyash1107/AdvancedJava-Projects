@@ -14,14 +14,24 @@ public class AlumniMasterService
         boolean b = amrepo.isAddAlumni(am);
         return b;
     }
-    public List<AlumniMasterModel> getalumni()
+    public boolean isAddBulkAlumni(AlumniMasterModel am)
     {
-        List<AlumniMasterModel> v = amrepo.getalumni();
+        boolean b = amrepo.isAddBulkAlumni(am);
+        return b;
+    }
+    public Vector<AlumniMasterModel> getalumni()
+    {
+        Vector<AlumniMasterModel> v = amrepo.getalumni();
         return v;
     }
     public boolean isAlumniUpdated(AlumniMasterModel am)
     {
         boolean b = amrepo.isAlumniUpdated(am);
+        return b;
+    }
+    public int deleid(AlumniMasterModel am)
+    {
+        int b = amrepo.deleid(am);
         return b;
     }
 }

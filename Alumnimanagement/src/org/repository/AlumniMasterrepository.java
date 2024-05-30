@@ -12,8 +12,29 @@ import org.model.AlumniMasterModel;
 
 public class AlumniMasterrepository extends DBHelper
 {
-    List<AlumniMasterModel> v = new ArrayList<AlumniMasterModel>();
+    Vector<AlumniMasterModel> v = new Vector<AlumniMasterModel>();
     public boolean isAddAlumni(AlumniMasterModel am)
+    {
+        try
+        {
+            pstmt = conn.prepareStatement("insert into AlumniMaster values('0',?,?,?,?,?,?)");
+            pstmt.setString(1, am.getname());
+            pstmt.setString(2, am.getEmail());
+            pstmt.setString(3, am.getContact());
+            pstmt.setInt(4, am.getAge());
+            pstmt.setString(5, am.getCompany());
+            pstmt.setInt(6, am.getBid());
+            int val;
+            val = pstmt.executeUpdate();
+            return val>0?true:false;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Error is " + ex);
+        }
+        return false;
+    }
+    public boolean isAddBulkAlumni(AlumniMasterModel am)
     {
         try
         {
@@ -58,7 +79,7 @@ public class AlumniMasterrepository extends DBHelper
         }
         return false;
     }
-    public List<AlumniMasterModel> getalumni()
+    public Vector<AlumniMasterModel> getalumni()
     {
         try
         {
@@ -96,13 +117,13 @@ public class AlumniMasterrepository extends DBHelper
         try
         {
             pstmt = conn.prepareStatement("update Alumnimaster set Name = ?,Email=?,Contact=?,Age=?,Company=?,Bid=? where Aid=?");
-            pstmt.setInt(1, am.getid());
-            pstmt.setString(2, am.getname());
-            pstmt.setString(3, am.getEmail());
-            pstmt.setString(4, am.getContact());
-            pstmt.setInt(5, am.getAge());
-            pstmt.setString(6, am.getCompany());
-            pstmt.setInt(7, am.getBid());
+            pstmt.setString(1, am.getname());
+            pstmt.setString(2, am.getEmail());
+            pstmt.setString(3, am.getContact());
+            pstmt.setInt(4, am.getAge());
+            pstmt.setString(5, am.getCompany());
+            pstmt.setInt(6, am.getBid());
+            pstmt.setInt(7, am.getid());
             int val;
             val = pstmt.executeUpdate();
             return val>0?true:false;
@@ -112,5 +133,21 @@ public class AlumniMasterrepository extends DBHelper
             System.out.println("Exception is " + ex);    
         }
         return false;
+    }
+    public int deleid(AlumniMasterModel am)
+    {
+        try
+        {
+            pstmt = conn.prepareStatement("delete from AlumniMaster where Aid=?");
+            pstmt.setInt(1, am.getid());
+            int val;
+            val = pstmt.executeUpdate();
+            return val>0?1:0;
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Error is " + ex);
+        }
+        return 0;
     }
 }
