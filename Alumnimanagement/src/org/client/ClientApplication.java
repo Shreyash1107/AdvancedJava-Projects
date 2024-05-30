@@ -11,6 +11,7 @@ public class ClientApplication
     {
         int choice;
         String Batch_name;
+        boolean b;
         int Bid,Age;
         String Name,Email,Contact,Company;
         BatchMasterModel bm = new BatchMasterModel();
@@ -43,7 +44,7 @@ public class ClientApplication
                 System.out.println("Enter the Batch Year you want to add:");
                 Batch_name = xyz.nextLine();
                 bm.setname(Batch_name);
-                boolean b = bs.isAddbatch(bm);
+                b = bs.isAddbatch(bm);
                 if(b)
                 {
                     System.out.println("Batch Added Successfully....");
@@ -69,7 +70,40 @@ public class ClientApplication
                         switch(choice)
                         {
                             case 1:
-                            xyz.nextLine();  //Consuming newline Character
+                            System.out.println("1.Add the Alumni Details....");
+                            System.out.println(" ");
+                            b = ams.isAddAlumni(am);
+                            if(b)
+                            {
+                                System.out.println("Alumni Successfully added....");
+                            }
+                            else
+                            {
+                                System.out.println("There is Some Issue.....");
+                            }
+                            break;
+                                case 2:
+                                System.out.println("2. View All the Alumni Details....");
+                                System.out.println(" ");
+                                List<AlumniMasterModel> v = ams.getalumni();
+                                if(v!=null)
+                                {
+                                    System.out.println("Alumni are Present inside Database....");
+                                    for(AlumniMasterModel amd:v )
+                                    {
+                                        System.out.println(amd.getid() + " " + amd.getname() + " " + amd.getEmail() + " " 
+                                        + amd.getContact() + " " + amd.getAge() + " " + amd.getCompany() + amd.getBid());
+                                        System.out.println(" ");
+                                    }
+                                }
+                                else
+                                {
+                                    System.out.println("Data is not there is Database....");
+                                }
+                                break;
+                                    case 3:
+                                    System.out.println("3.Update Alumni Details......");
+                                    System.out.println(" ");
                         }
                     }while(choice!=5);
             }

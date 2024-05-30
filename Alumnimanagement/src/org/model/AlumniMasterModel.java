@@ -2,12 +2,21 @@ package org.model;
 
 public class AlumniMasterModel 
 {
+    private int Aid;
     private String Name;
     private String Email;
     private String Contact;
     private int Age;
     private String Company;
     private int Bid;
+    public void setAid(int Aid)
+    {
+        this.Aid = Aid;
+    }
+    public int getid()
+    {
+        return Aid;
+    }
     public void setname(String Name)
     {
         this.Name = Name;
