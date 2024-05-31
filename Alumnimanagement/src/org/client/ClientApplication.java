@@ -15,6 +15,7 @@ public class ClientApplication
         String Batch_name;
         boolean b;
         int Aid,Bid,Age,Eid;
+        Vector <AlumniMasterModel> v = new Vector<AlumniMasterModel>();
         String Name,Email,Contact,Company,Venue,Time,date;
         BatchMasterModel bm = new BatchMasterModel();
         BatchMasterService bs = new BatchMasterService();
@@ -120,20 +121,20 @@ public class ClientApplication
                                 case 3:
                                 System.out.println("2. View All the Alumni Details....");
                                 System.out.println(" ");
-                                Vector<AlumniMasterModel> v = ams.getalumni();
+                                 v = ams.getalumni();
                                 if(v!=null)
                                 {
-                                    System.out.println("Alumni are Present inside Database....");
-                                    for(AlumniMasterModel model:v )
+                                    System.out.println("Alumni has been Stored in database Successfully.....");
+                                    for(AlumniMasterModel amodel: v)
                                     {
-                                        System.out.println(model.getid() + " " + model.getname() + " " + model.getEmail() + " " 
-                                        + model.getContact() + " " + model.getAge() + " " + model.getCompany()+ " " + model.getBid());
-                                        System.out.println(" ");
+                                        System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getEmail() + " " + amodel.getContact() + " " + amodel.getAge() + " " + amodel.getCompany() + " " + amodel.getBid());
                                     }
-                                }
+                                    System.out.println(" ");
+                                } 
                                 else
                                 {
-                                    System.out.println("Data is not there is Database....");
+                                    System.out.println("Alumni Data is not present inside Database....");
+                                    System.out.println(" ");
                                 }
                                 break;
                                     case 4:
@@ -152,7 +153,6 @@ public class ClientApplication
                                     System.out.println("Enter the Contact of the Alumni...");
                                     Contact = xyz.nextLine();
                                     am.setContact(Contact);
-                                    xyz.nextLine(); //Consuming newline character
                                     System.out.println("Enter the Company name:");
                                     Company = xyz.nextLine().trim();
                                     am.setCompany(Company);
@@ -171,6 +171,21 @@ public class ClientApplication
                                     {
                                         System.out.println("There might be some issue....");
                                     }
+                                    v = ams.getalumni();
+                                    if(v!=null)
+                                    {
+                                        System.out.println("Alumni are present in Database....");
+                                        for(AlumniMasterModel amodel : v)
+                                        {
+                                            System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getEmail() + " " + amodel.getContact() + " " + amodel.getAge() + " " + amodel.getCompany() + " " + amodel.getBid());
+                                            System.out.println(" ");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        System.out.println("There might be some issue as Databse does not have Alumni details....");
+                                        System.out.println(" ");
+                                    }
                                     break;
                                         case 5:
                                         System.out.println("4. Delete Alumni Details......");
@@ -187,12 +202,28 @@ public class ClientApplication
                                         {
                                             System.out.println("Alumni with id " + Aid + " has not been removed, there might be some issue.....");
                                         }
+                                        v = ams.getalumni();
+                                        if(v!=null)
+                                        {
+                                            System.out.println("Alumni Are Present in Database....");
+                                            for(AlumniMasterModel amodel : v)
+                                            {
+                                                System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getEmail() + " " + amodel.getContact() + " " + amodel.getAge() + " " + amodel.getCompany() + " " + amodel.getBid());
+                                                System.out.println(" ");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            System.out.println("There is some issue data might not be there.....");
+                                            System.out.println(" ");
+                                        }
                                         break;
                                             default:
                                             System.out.println("Invalid Choice....");
                                             break;
                         }
                     }while(choice!=6);
+                    break;
                         case 3:
                             System.out.println("3.Add the New AlumniEvent.....");
                             System.out.println(" ");

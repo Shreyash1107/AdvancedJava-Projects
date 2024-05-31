@@ -12,7 +12,7 @@ import org.model.AlumniMasterModel;
 
 public class AlumniMasterrepository extends DBHelper
 {
-    Vector<AlumniMasterModel> v = new Vector<AlumniMasterModel>();
+    Vector<AlumniMasterModel> v =null; 
     public boolean isAddAlumni(AlumniMasterModel am)
     {
         try
@@ -68,7 +68,7 @@ public class AlumniMasterrepository extends DBHelper
     {
         try
         {
-            
+            v=new Vector<AlumniMasterModel>();
             pstmt = conn.prepareStatement("select *from alumnimaster");
             rs = pstmt.executeQuery();
             while(rs.next())
@@ -83,6 +83,9 @@ public class AlumniMasterrepository extends DBHelper
                 am.setBid(rs.getInt(7));
                 v.add(am);
             }
+            pstmt.close();
+            rs.close();
+            
             if(v.size()>0)
             {
                 return v;
@@ -111,7 +114,9 @@ public class AlumniMasterrepository extends DBHelper
             pstmt.setInt(7, am.getid());
             int val;
             val = pstmt.executeUpdate();
+            pstmt.close();
             return val>0?true:false;
+
         }
         catch(Exception ex)
         {
@@ -125,8 +130,9 @@ public class AlumniMasterrepository extends DBHelper
         {
             pstmt = conn.prepareStatement("delete from AlumniMaster where Aid=?");
             pstmt.setInt(1, am.getid());
-            int val;
+            int val=0;
             val = pstmt.executeUpdate();
+            pstmt.close();
             return val>0?1:0;
         }
         catch(Exception ex)
