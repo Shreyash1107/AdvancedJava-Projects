@@ -9,6 +9,19 @@ public class AlumniMasterModel
     private int Age;
     private String Company;
     private int Bid;
+    public AlumniMasterModel()
+    {
+
+    }
+    public AlumniMasterModel(String Name,String Email,String Contact,int Age,String Company,int Bid)
+    {
+        this.Name=Name;
+        this.Email=Email;
+        this.Contact=Contact;
+        this.Age=Age;
+        this.Company=Company;
+        this.Bid=Bid;
+    }
     public void setAid(int Aid)
     {
         this.Aid = Aid;

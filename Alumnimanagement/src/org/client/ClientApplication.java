@@ -2,8 +2,10 @@ package org.client;
 import java.util.*;
 import org.model.AlumniMasterModel;
 import org.model.BatchMasterModel;
+import org.model.EventMasterModel;
 import org.service.AlumniMasterService;
 import org.service.BatchMasterService;
+import org.service.EventmasterService;
 public class ClientApplication 
 {
     public static void main(String args[])
@@ -12,17 +14,19 @@ public class ClientApplication
         int flag;
         String Batch_name;
         boolean b;
-        int Aid,Bid,Age;
-        String Name,Email,Contact,Company;
+        int Aid,Bid,Age,Eid;
+        String Name,Email,Contact,Company,Venue,Time,date;
         BatchMasterModel bm = new BatchMasterModel();
         BatchMasterService bs = new BatchMasterService();
         AlumniMasterModel am = new AlumniMasterModel();
         AlumniMasterService ams = new AlumniMasterService();
+        EventMasterModel em = new EventMasterModel();
+        EventmasterService ems = new EventmasterService();
         Scanner xyz = new Scanner(System.in);
         do
         {
             System.out.println("1.Add Alumni's Passout Batch Details....");
-            System.out.println("2.Add new Alumni/View ALumni/Update Alumni/Delete Alumni......");
+            System.out.println("2.Add new Alumni/View Alumni/Update Alumni/Delete Alumni......");
             System.out.println("3.Add New Alumni Event.....");
             System.out.println("4.Send SMS to Alumni for Event....");
             System.out.println("5.Take Attendance of Alumni.....");
@@ -76,24 +80,19 @@ public class ClientApplication
                         System.out.println(" ");
                         System.out.println("Enter the Name of the Alumni:");
                         Name = xyz.nextLine();
-                        am.setname(Name);
                         System.out.println("Enter the Email of the Alumni:");
                         Email = xyz.nextLine();
-                        am.setEmail(Email);
                         System.out.println("Enter the Contact of the Alumni:");
                         Contact = xyz.nextLine();
-                        am.setContact(Contact);
                         System.out.println("Enter the Age of the Alumni:");
                         Age = xyz.nextInt();
-                        am.setAge(Age);
                         xyz.nextLine();  //Consuming newline character
                         System.out.println("Enter the Alumni's Company:");
                         Company = xyz.nextLine();
-                        am.setCompany(Company);
                         System.out.println("Enter the Alumni's Batch Id:");
                         Bid = xyz.nextInt();
-                        am.setBid(Bid);
-                        b = ams.isAddAlumni(am);
+                        AlumniMasterModel amd = new AlumniMasterModel(Name,Email,Contact,Age,Company,Bid);
+                        b = ams.isAddAlumni(amd);
                         if(b)
                         {
                             System.out.println("Data Successfully Added for Alumni.....");
@@ -125,10 +124,10 @@ public class ClientApplication
                                 if(v!=null)
                                 {
                                     System.out.println("Alumni are Present inside Database....");
-                                    for(AlumniMasterModel amd:v )
+                                    for(AlumniMasterModel model:v )
                                     {
-                                        System.out.println(amd.getid() + " " + amd.getname() + " " + amd.getEmail() + " " 
-                                        + amd.getContact() + " " + amd.getAge() + " " + amd.getCompany() + amd.getBid());
+                                        System.out.println(model.getid() + " " + model.getname() + " " + model.getEmail() + " " 
+                                        + model.getContact() + " " + model.getAge() + " " + model.getCompany()+ " " + model.getBid());
                                         System.out.println(" ");
                                     }
                                 }
@@ -197,6 +196,32 @@ public class ClientApplication
                         case 3:
                             System.out.println("3.Add the New AlumniEvent.....");
                             System.out.println(" ");
+                            xyz.nextLine();  //Consuming newline character
+                            System.out.println("Enter the Name of the Event:");
+                            Name = xyz.nextLine();
+                            System.out.println("Enter the Event Date:");
+                            date = xyz.nextLine();
+                            System.out.println("Enter the Event Time:");
+                            Time = xyz.nextLine();
+                            System.out.println("Enter the Event Venue:");
+                            Venue = xyz.nextLine();
+                            System.out.println("Enter the Passout Batch Id of an ALumni for that Event:");
+                            Bid = xyz.nextInt();
+                            System.out.println("Enter the Alumni Id:");
+                            Aid = xyz.nextInt();
+                            EventMasterModel emd = new EventMasterModel(Name, date, Time, Venue, Bid, Aid);
+                            b = ems.isEventAdded(emd);
+                            if(b)
+                            {
+                                System.out.println("Event Details Successfully Added...");
+                                System.out.println(" ");
+                            }
+                            else
+                            {
+                                System.out.println("There is some issue....");
+                                System.out.println(" ");
+                            }
+                            break;
             }
         }while(true);
     }

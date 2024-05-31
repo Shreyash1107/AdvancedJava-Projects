@@ -45,12 +45,6 @@ public class AlumniMasterrepository extends DBHelper
             while((line = br.readLine()) != null)
             {
                 String data[] = line.split(",");
-                if (data.length != 7) 
-                {
-                    System.out.println("Skipping line due to incorrect format: " + line);
-                    continue;
-                }
-                try {
                     pstmt = conn.prepareStatement("insert into alumnimaster values(0,?,?,?,?,?,?)");
                     pstmt.setString(1, data[1]);
                     pstmt.setString(2, data[2]);
@@ -59,15 +53,6 @@ public class AlumniMasterrepository extends DBHelper
                     pstmt.setString(5, data[5]);
                     pstmt.setInt(6, Integer.parseInt(data[6]));
                     val = pstmt.executeUpdate();
-                } 
-                catch (ArrayIndexOutOfBoundsException ex) 
-                {
-                    System.out.println("Array index out of bounds for line: " + line);
-                } 
-                catch (NumberFormatException ex) 
-                {
-                    System.out.println("Number format exception for line: " + line);
-                }
             }
             br.close();
             fr.close();
