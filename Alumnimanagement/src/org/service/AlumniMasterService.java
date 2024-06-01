@@ -34,28 +34,4 @@ public class AlumniMasterService
         int b = amrepo.deleid(am);
         return b;
     }
-    // public void viewalumni()
-    // {
-    //     try
-    //     {
-    //         Vector<AlumniMasterModel> v = amrepo.getalumni();
-    //         if(v!=null)
-    //         {
-    //             System.out.println("Alumni are present in Database.....");
-    //             System.out.println(" ");
-    //             for(AlumniMasterModel am : v)
-    //             {
-    //                 System.out.println(am.getid() + " " + am.getname() + " " + am.getEmail() + " " + am.getContact() + " " + am.getAge() + " " + am.getCompany() + " " +am.getBid());
-    //             }
-    //         }
-    //         else
-    //         {
-    //             System.out.println("Data is not present in database.....");
-    //         }
-    //     }
-    //     catch(Exception ex)
-    //     {
-    //         System.out.println("Error is " + ex);
-    //     }
-    // }
 }
