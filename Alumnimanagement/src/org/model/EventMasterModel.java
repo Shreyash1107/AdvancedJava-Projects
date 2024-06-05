@@ -8,19 +8,19 @@ public class EventMasterModel
     private String Time;
     private String Venue;
     private int Bid;
-    private int Aid;
+    private String Subject;
     public EventMasterModel()
     {
 
     }
-    public EventMasterModel(String name,String date,String Time,String Venue,int Bid,int Aid)
+    public EventMasterModel(String name,String date,String Time,String Venue,int Bid,String Subject)
     {
         this.name = name;
         this.date = date;
         this.Time = Time;   
         this.Venue = Venue;
         this.Bid = Bid;
-        this.Aid = Aid;
+        this.Subject = Subject;
     }
     public void setEid(int Eid)
     {
@@ -70,12 +70,12 @@ public class EventMasterModel
     {
         return Bid;
     }
-    public void setAid(int Aid)
+    public void setSubject(String Subject)
     {
-        this.Aid = Aid;
+        this.Subject = Subject;
     }
-    public int getAid()
+    public String getSubject()
     {
-        return Aid;
+        return Subject;
     }
 }

@@ -9,6 +9,7 @@ public class AlumniMasterModel
     private int Age;
     private String Company;
     private int Bid;
+    private EventMasterModel em;
     public AlumniMasterModel()
     {
 
@@ -77,5 +78,13 @@ public class AlumniMasterModel
     public int getBid()
     {
         return Bid;
+    }
+    public void setEventmAsterModel(EventMasterModel em)
+    {
+        this.em = em;
+    }
+    public EventMasterModel getEventMasterModel()
+    {
+        return em;
     }
 }

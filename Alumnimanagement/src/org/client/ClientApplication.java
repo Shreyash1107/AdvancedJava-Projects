@@ -12,10 +12,11 @@ public class ClientApplication
     {
         int choice;
         int flag;
-        String Batch_name;
+        String Batch_name,Subject;
         boolean b;
         int Aid,Bid,Age,Eid;
         Vector <AlumniMasterModel> v = new Vector<AlumniMasterModel>();
+        Vector <EventMasterModel> vect = new Vector<EventMasterModel>();
         String Name,Email,Contact,Company,Venue,Time,date;
         BatchMasterModel bm = new BatchMasterModel();
         BatchMasterService bs = new BatchMasterService();
@@ -29,13 +30,14 @@ public class ClientApplication
             System.out.println("1.Add Alumni's Passout Batch Details....");
             System.out.println("2.Add new Alumni/View Alumni/Update Alumni/Delete Alumni......");
             System.out.println("3.Add New Alumni Event.....");
-            System.out.println("4.Send SMS to Alumni for Event....");
-            System.out.println("5.Take Attendance of Alumni.....");
-            System.out.println("6.View all Alumni Details as Per Event....");
-            System.out.println("7.View all Absent ALumni....");
-            System.out.println("8.Take Feedback from Alumni....");
-            System.out.println("9.Sort Alumni Year Wise....");
-            System.out.println("10.Find the Most Senior Alumni in Meet....");
+            System.out.println("4.View all the Alumni Events....");
+            System.out.println("5.Send SMS to Alumni for Event....");
+            System.out.println("6.Take Attendance of Alumni.....");
+            System.out.println("7.View all Alumni Details as Per Event....");
+            System.out.println("8.View all Absent Alumni....");
+            System.out.println("9.Take Feedback from Alumni....");
+            System.out.println("10.Sort Alumni Year Wise....");
+            System.out.println("11.Find the Most Senior Alumni in Meet....");
             System.out.println(" ");
             System.out.println("Enter the choice:");
             choice = xyz.nextInt();
@@ -106,7 +108,7 @@ public class ClientApplication
                         }
                         break;
                             case 2:
-                            System.out.println("1.Add the Alumni Details....");
+                            System.out.println("2.Add the Alumni Details in bulk....");
                             System.out.println(" ");
                             b = ams.isAddBulkAlumni(am);
                             if(b)
@@ -119,7 +121,7 @@ public class ClientApplication
                             }
                             break;
                                 case 3:
-                                System.out.println("2. View All the Alumni Details....");
+                                System.out.println("3. View All the Alumni Details....");
                                 System.out.println(" ");
                                  v = ams.getalumni();
                                 if(v!=null)
@@ -127,7 +129,10 @@ public class ClientApplication
                                     System.out.println("Alumni has been Stored in database Successfully.....");
                                     for(AlumniMasterModel amodel: v)
                                     {
-                                        System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getEmail() + " " + amodel.getContact() + " " + amodel.getAge() + " " + amodel.getCompany() + " " + amodel.getBid());
+                                        System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getEmail() + " " 
+                                        + amodel.getContact() + " " + amodel.getAge() + " " + amodel.getCompany() + " " 
+                                        + amodel.getBid());
+                                        System.out.println(" ");
                                     }
                                     System.out.println(" ");
                                 } 
@@ -138,7 +143,7 @@ public class ClientApplication
                                 }
                                 break;
                                     case 4:
-                                    System.out.println("3.Update Alumni Details......");
+                                    System.out.println("4.Update Alumni Details......");
                                     System.out.println(" ");
                                     System.out.println("Enter the Alumni Id you wanted to Update:");
                                     Aid = xyz.nextInt();
@@ -177,7 +182,9 @@ public class ClientApplication
                                         System.out.println("Alumni are present in Database....");
                                         for(AlumniMasterModel amodel : v)
                                         {
-                                            System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getEmail() + " " + amodel.getContact() + " " + amodel.getAge() + " " + amodel.getCompany() + " " + amodel.getBid());
+                                            System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getEmail() + " " 
+                                            + amodel.getContact() + " " + amodel.getAge() + " " + amodel.getCompany() + " " + 
+                                            amodel.getBid());
                                             System.out.println(" ");
                                         }
                                     }
@@ -188,7 +195,7 @@ public class ClientApplication
                                     }
                                     break;
                                         case 5:
-                                        System.out.println("4. Delete Alumni Details......");
+                                        System.out.println("5. Delete Alumni Details......");
                                         System.out.println(" ");
                                         System.out.println("Enter the Alumni Id which you want to delete:");
                                         Aid = xyz.nextInt();
@@ -208,7 +215,9 @@ public class ClientApplication
                                             System.out.println("Alumni Are Present in Database....");
                                             for(AlumniMasterModel amodel : v)
                                             {
-                                                System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getEmail() + " " + amodel.getContact() + " " + amodel.getAge() + " " + amodel.getCompany() + " " + amodel.getBid());
+                                                System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getEmail() + " " 
+                                                + amodel.getContact() + " " + amodel.getAge() + " " + amodel.getCompany() + " " + 
+                                                amodel.getBid());
                                                 System.out.println(" ");
                                             }
                                         }
@@ -238,9 +247,12 @@ public class ClientApplication
                             Venue = xyz.nextLine();
                             System.out.println("Enter the Passout Batch Id of an ALumni for that Event:");
                             Bid = xyz.nextInt();
-                            System.out.println("Enter the Alumni Id:");
-                            Aid = xyz.nextInt();
-                            EventMasterModel emd = new EventMasterModel(Name, date, Time, Venue, Bid, Aid);
+                            // System.out.println("Enter the Alumni Id:");
+                            // Aid = xyz.nextInt();
+                            xyz.nextLine();  //Consuming newline Character
+                            System.out.println("Enter the Event Subject:");
+                            Subject =  xyz.nextLine();
+                            EventMasterModel emd = new EventMasterModel(Name, date, Time, Venue, Bid, Subject);
                             b = ems.isEventAdded(emd);
                             if(b)
                             {
@@ -253,6 +265,33 @@ public class ClientApplication
                                 System.out.println(" ");
                             }
                             break;
+                                case 4:
+                                System.out.println("4.View all the Alumni Events....");
+                                System.out.println(" ");
+                                vect = ems.getallEvents();
+                                if(vect!=null)
+                                {
+                                    System.out.println("Events are there in Database....");
+                                    for(EventMasterModel emodel : vect)
+                                    {
+                                        System.out.println(emodel.getEid() + " " + emodel.getname() + " " + emodel.getDate()
+                                         + " " + emodel.gettime() + " " + emodel.getVenue() + " " + emodel.getBid() + " " + 
+                                         emodel.getSubject());
+                                        System.out.println(" ");
+                                    }
+                                }
+                                else
+                                {
+                                    System.out.println("Events are there in database......");
+                                    System.out.println(" ");
+                                }
+                                break;
+                                    case 5:
+                                    break;
+                                        case 6:
+                                        break;
+                                            case 7:
+
             }
         }while(true);
     }

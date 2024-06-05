@@ -5,13 +5,13 @@ import java.sql.*;
 import java.util.Properties;
 public class DBConfig 
 {
-    protected Connection conn;
-	protected PreparedStatement pstmt;
-	protected ResultSet rs;
+    private static Connection conn;
+	private static PreparedStatement pstmt;
+	private static ResultSet rs;
     private static DBConfig db = null;
-	public static void main(String[] args) {
-		new  DBConfig();
-	}
+	// public static void main(String[] args) {
+	// 	new  DBConfig();
+	// }
     private DBConfig()
     {
         try
