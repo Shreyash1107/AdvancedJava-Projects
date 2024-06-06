@@ -3,6 +3,7 @@ import java.util.*;
 import org.model.AlumniMasterModel;
 import org.model.BatchMasterModel;
 import org.model.EventMasterModel;
+import org.service.AlumniEventService;
 import org.service.AlumniMasterService;
 import org.service.BatchMasterService;
 import org.service.EventmasterService;
@@ -24,6 +25,7 @@ public class ClientApplication
         AlumniMasterService ams = new AlumniMasterService();
         EventMasterModel em = new EventMasterModel();
         EventmasterService ems = new EventmasterService();
+        AlumniEventService aservice = new AlumniEventService(); 
         Scanner xyz = new Scanner(System.in);
         do
         {
@@ -291,6 +293,27 @@ public class ClientApplication
                                         case 6:
                                         break;
                                             case 7:
+                                            System.out.println("7.View all the ALumni Details as per Event:");
+                                            System.out.println(" ");
+                                            xyz.nextLine();  //Consuming newline character
+                                            System.out.println("Enter the Event Name:");
+                                            Name = xyz.nextLine().trim();
+                                            v = aservice.getalumniwiseevents(Name);
+                                            if(v!=null)
+                                            {
+                                                System.out.println("For " + Name  + " event Alumni Setails are there in Database.....");
+                                                for(AlumniMasterModel amodel : v)
+                                                {
+                                                    System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getCompany());
+                                                    System.out.println(" ");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                System.out.println("Alumni Details are not there present for " + Name + " Event...." );
+                                                System.out.println(" ");
+                                            }
+                                            break;
 
             }
         }while(true);
