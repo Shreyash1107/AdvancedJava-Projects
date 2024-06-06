@@ -142,35 +142,35 @@ public class AlumniMasterrepository extends DBHelper
         }
         return 0;
     }
-    public Vector<AlumniMasterModel> getsenioralumni()
-    {
-        try
-        {
-            v = new Vector<AlumniMasterModel>();
-            pstmt = conn.prepareStatement("select name,Age,Company from Alumnimaster where Age = (select max(Age) from Alumnimaster)");
-            rs = pstmt.executeQuery();
-            while(rs.next())
-            {
-                AlumniMasterModel amd = new AlumniMasterModel();
-                amd.setname(rs.getString(1));
-                amd.setAge(rs.getInt(2));
-                amd.setCompany(rs.getString(3));
-                v.add(amd);
-            }
-            if(v.size()>0)
-            {
-                return v;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        catch(Exception ex)
-        {
-            return null;
-        }
-    }
+    // public Vector<AlumniMasterModel> getsenioralumni()
+    // {
+    //     try
+    //     {
+    //         v = new Vector<AlumniMasterModel>();
+    //         pstmt = conn.prepareStatement("select name,Age,Company from Alumnimaster where Age = (select max(Age) from Alumnimaster)");
+    //         rs = pstmt.executeQuery();
+    //         while(rs.next())
+    //         {
+    //             AlumniMasterModel amd = new AlumniMasterModel();
+    //             amd.setname(rs.getString(1));
+    //             amd.setAge(rs.getInt(2));
+    //             amd.setCompany(rs.getString(3));
+    //             v.add(amd);
+    //         }
+    //         if(v.size()>0)
+    //         {
+    //             return v;
+    //         }
+    //         else
+    //         {
+    //             return null;
+    //         }
+    //     }
+    //     catch(Exception ex)
+    //     {
+    //         return null;
+    //     }
+    // }
     public Vector<AlumniMasterModel> sortyearwisealumni()
     {
         v = new Vector<AlumniMasterModel>();

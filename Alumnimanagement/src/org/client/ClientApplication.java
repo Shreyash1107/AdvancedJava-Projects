@@ -5,6 +5,7 @@ import org.model.BatchMasterModel;
 import org.model.EventMasterModel;
 import org.service.AlumniEventService;
 import org.service.AlumniMasterService;
+import org.service.Attendanceservice;
 import org.service.BatchMasterService;
 import org.service.EventmasterService;
 public class ClientApplication 
@@ -13,7 +14,7 @@ public class ClientApplication
     {
         int choice;
         int flag;
-        String Batch_name,Subject;
+        String Batch_name,Subject,evdate;
         boolean b;
         int Aid,Bid,Age,Eid;
         Vector <AlumniMasterModel> v = new Vector<AlumniMasterModel>();
@@ -26,6 +27,8 @@ public class ClientApplication
         EventMasterModel em = new EventMasterModel();
         EventmasterService ems = new EventmasterService();
         AlumniEventService aservice = new AlumniEventService(); 
+        // AttendanceModel atm = new AttendanceModel();
+        Attendanceservice atservice = new  Attendanceservice(); 
         Scanner xyz = new Scanner(System.in);
         do
         {
@@ -291,7 +294,9 @@ public class ClientApplication
                                     case 5:
                                     break;
                                         case 6:
-
+                                        System.out.println("6.Take Attendance of Alumni.....");
+                                        System.out.println(" ");
+                                        
                                         break;
                                             case 7:
                                             System.out.println("7.View all the ALumni Details as per Event:");
@@ -341,21 +346,21 @@ public class ClientApplication
                                                         case 11:
                                                         System.out.println("11.Find Most Senior Alumni in the Meet.....");
                                                         System.out.println(" ");
-                                                        v = ams.getsenioralumni();
-                                                        if(v!=null)
-                                                        {
-                                                            System.out.println("Details regarding Senior Alumni in the Meet are as Follows....");
-                                                            for(AlumniMasterModel amd : v)
-                                                            {
-                                                                System.out.println(amd.getname() + " " + amd.getAge() + " " + amd.getCompany());
-                                                                System.out.println(" ");
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            System.out.println("There is some issue in Database...");
-                                                            System.out.println(" ");
-                                                        }
+                                                        // v = ams.getsenioralumni();
+                                                        // if(v!=null)
+                                                        // {
+                                                        //     System.out.println("Details regarding Senior Alumni in the Meet are as Follows....");
+                                                        //     for(AlumniMasterModel amd : v)
+                                                        //     {
+                                                        //         System.out.println(amd.getname() + " " + amd.getAge() + " " + amd.getCompany());
+                                                        //         System.out.println(" ");
+                                                        //     }
+                                                        // }
+                                                        // else
+                                                        // {
+                                                        //     System.out.println("There is some issue in Database...");
+                                                        //     System.out.println(" ");
+                                                        // }
                                                         break;
             }
         }while(true);

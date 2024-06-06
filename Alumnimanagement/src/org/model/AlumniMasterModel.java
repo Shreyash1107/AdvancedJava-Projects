@@ -12,7 +12,7 @@ public class AlumniMasterModel
     private BatchMasterModel bm;
     public AlumniMasterModel()
     {
-
+        
     }
     public AlumniMasterModel(String Name,String Email,String Contact,int Age,String Company,int Bid)
     {
