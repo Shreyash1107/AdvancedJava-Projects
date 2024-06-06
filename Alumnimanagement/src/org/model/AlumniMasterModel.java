@@ -9,7 +9,7 @@ public class AlumniMasterModel
     private int Age;
     private String Company;
     private int Bid;
-    private EventMasterModel em;
+    private BatchMasterModel bm;
     public AlumniMasterModel()
     {
 
@@ -79,12 +79,12 @@ public class AlumniMasterModel
     {
         return Bid;
     }
-    public void setEventmAsterModel(EventMasterModel em)
+    public void setBatchMasterModel(BatchMasterModel bm)
     {
-        this.em = em;
+        this.bm = bm;
     }
-    public EventMasterModel getEventMasterModel()
+    public BatchMasterModel getBatchMasterModel()
     {
-        return em;
+        return bm;
     }
 }

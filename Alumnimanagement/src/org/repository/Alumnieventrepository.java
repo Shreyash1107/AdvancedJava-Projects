@@ -21,8 +21,8 @@ public class Alumnieventrepository extends DBHelper
                     amd.setAid(rs.getInt(1));
                     amd.setname(rs.getString(2));
                     amd.setCompany(rs.getString(3));
-                    EventMasterModel em = new EventMasterModel();
-                    amd.setEventmAsterModel(em);
+                    // EventMasterModel em = new EventMasterModel();
+                    // amd.setEventmAsterModel(em);
                     v2.add(amd); 
                 }
                 if(v2.size()>0)

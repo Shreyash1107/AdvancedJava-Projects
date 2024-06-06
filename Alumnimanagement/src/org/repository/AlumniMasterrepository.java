@@ -9,6 +9,7 @@ import java.util.Vector;
 import org.config.DBHelper;
 import org.config.PathHelper;
 import org.model.AlumniMasterModel;
+import org.model.BatchMasterModel;
 
 public class AlumniMasterrepository extends DBHelper
 {
@@ -140,5 +141,66 @@ public class AlumniMasterrepository extends DBHelper
             System.out.println("Error is " + ex);
         }
         return 0;
+    }
+    public Vector<AlumniMasterModel> getsenioralumni()
+    {
+        try
+        {
+            v = new Vector<AlumniMasterModel>();
+            pstmt = conn.prepareStatement("select name,Age,Company from Alumnimaster where Age = (select max(Age) from Alumnimaster)");
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                AlumniMasterModel amd = new AlumniMasterModel();
+                amd.setname(rs.getString(1));
+                amd.setAge(rs.getInt(2));
+                amd.setCompany(rs.getString(3));
+                v.add(amd);
+            }
+            if(v.size()>0)
+            {
+                return v;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
+    }
+    public Vector<AlumniMasterModel> sortyearwisealumni()
+    {
+        v = new Vector<AlumniMasterModel>();
+        try
+        {
+            pstmt = conn.prepareStatement("select am.Aid as Aid,am.Name as Alumni_Name,am.Company as Company_Name,bm.Batch_name as Year from Alumnimaster am inner join BatchMaster bm on am.Bid = bm.Bid order by bm.Batch_name asc");
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                AlumniMasterModel am = new AlumniMasterModel();
+                am.setAid(rs.getInt(1));
+                am.setname(rs.getString(2));
+                am.setCompany(rs.getString(3));
+                BatchMasterModel bm = new BatchMasterModel();
+                bm.setname(rs.getString(4));
+                am.setBatchMasterModel(bm);
+                v.add(am); 
+            }
+            if(v.size()>0)
+            {
+                return v;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 }

@@ -291,6 +291,7 @@ public class ClientApplication
                                     case 5:
                                     break;
                                         case 6:
+
                                         break;
                                             case 7:
                                             System.out.println("7.View all the ALumni Details as per Event:");
@@ -301,7 +302,7 @@ public class ClientApplication
                                             v = aservice.getalumniwiseevents(Name);
                                             if(v!=null)
                                             {
-                                                System.out.println("For " + Name  + " event Alumni Setails are there in Database.....");
+                                                System.out.println("For " + Name  + " event Alumni Setails are there in Database and which are as follows.....");
                                                 for(AlumniMasterModel amodel : v)
                                                 {
                                                     System.out.println(amodel.getid() + " " + amodel.getname() + " " + amodel.getCompany());
@@ -310,11 +311,52 @@ public class ClientApplication
                                             }
                                             else
                                             {
-                                                System.out.println("Alumni Details are not there present for " + Name + " Event...." );
+                                                System.out.println("Alumni Details are not there present for " + Name + " Event inside database...." );
                                                 System.out.println(" ");
                                             }
                                             break;
-
+                                                case 9:
+                                                break;
+                                                    case 10:
+                                                    System.out.println("10.Sort the Alumni Details Year-Wise.....");
+                                                    System.out.println(" ");
+                                                    v = ams.sortyearwisealumni();
+                                                    if(v!=null)
+                                                    {
+                                                        System.out.println("Alumni Successfully Sorted Year Wise.....");
+                                                        System.out.println(" ");
+                                                        for(AlumniMasterModel alumnimodel : v)
+                                                        {
+                                                            System.out.println(alumnimodel.getid() + " " + alumnimodel.getname() + " " + alumnimodel.getCompany() + " " + alumnimodel.getBatchMasterModel().getBatch_name().split("-")[0]);
+                                                                //alumnimodel.getBatchMasterModel().getBatch_name().split("-")[0] - avoid displying date format so splitting through '-' and fetchin gdata at index 0
+                                                            System.out.println(" ");
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        System.out.println("Some Problem is there in Database table....");
+                                                        System.out.println(" ");
+                                                    }
+                                                    break;
+                                                        case 11:
+                                                        System.out.println("11.Find Most Senior Alumni in the Meet.....");
+                                                        System.out.println(" ");
+                                                        v = ams.getsenioralumni();
+                                                        if(v!=null)
+                                                        {
+                                                            System.out.println("Details regarding Senior Alumni in the Meet are as Follows....");
+                                                            for(AlumniMasterModel amd : v)
+                                                            {
+                                                                System.out.println(amd.getname() + " " + amd.getAge() + " " + amd.getCompany());
+                                                                System.out.println(" ");
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            System.out.println("There is some issue in Database...");
+                                                            System.out.println(" ");
+                                                        }
+                                                        break;
             }
         }while(true);
     }
