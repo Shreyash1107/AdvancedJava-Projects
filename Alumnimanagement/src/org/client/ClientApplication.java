@@ -1,6 +1,7 @@
 package org.client;
 import java.util.*;
 import org.model.AlumniMasterModel;
+import org.model.AttendanceModel;
 import org.model.BatchMasterModel;
 import org.model.EventMasterModel;
 import org.service.AlumniEventService;
@@ -14,11 +15,12 @@ public class ClientApplication
     {
         int choice;
         int flag;
-        String Batch_name,Subject,evdate;
+        String Batch_name,Subject,evdate,status;
         boolean b;
         int Aid,Bid,Age,Eid;
         Vector <AlumniMasterModel> v = new Vector<AlumniMasterModel>();
         Vector <EventMasterModel> vect = new Vector<EventMasterModel>();
+        Vector <AttendanceModel> v1 = new Vector<AttendanceModel>();
         String Name,Email,Contact,Company,Venue,Time,date;
         BatchMasterModel bm = new BatchMasterModel();
         BatchMasterService bs = new BatchMasterService();
@@ -27,7 +29,7 @@ public class ClientApplication
         EventMasterModel em = new EventMasterModel();
         EventmasterService ems = new EventmasterService();
         AlumniEventService aservice = new AlumniEventService(); 
-        // AttendanceModel atm = new AttendanceModel();
+        AttendanceModel atm = new AttendanceModel();
         Attendanceservice atservice = new  Attendanceservice(); 
         Scanner xyz = new Scanner(System.in);
         do
@@ -38,8 +40,8 @@ public class ClientApplication
             System.out.println("4.View all the Alumni Events....");
             System.out.println("5.Send SMS to Alumni for Event....");
             System.out.println("6.Take Attendance of Alumni.....");
-            System.out.println("7.View all Alumni Details as Per Event....");
-            System.out.println("8.View all Absent Alumni....");
+            System.out.println("7.View All Present/Absent Alumni in the Event.... ");
+            System.out.println("8.View all Alumni Details as Per Event....");
             System.out.println("9.Take Feedback from Alumni....");
             System.out.println("10.Sort Alumni Year Wise....");
             System.out.println("11.Find the Most Senior Alumni in Meet....");
@@ -296,10 +298,54 @@ public class ClientApplication
                                         case 6:
                                         System.out.println("6.Take Attendance of Alumni.....");
                                         System.out.println(" ");
-                                        
+                                        System.out.println("Enter the Batch Id:");
+                                        Bid = xyz.nextInt();
+                                        System.out.println("Enter the Event Id:");
+                                        Eid = xyz.nextInt();
+                                        xyz.nextLine();  //Consuming newline character
+                                        System.out.println("Enter the Event Date:");
+                                        evdate = xyz.nextLine();
+                                        System.out.println("Enter P if you are present otherwise if you are not Present then Enter A");
+                                        status = xyz.nextLine();
+                                        b = atservice.isAttendancemarked(Bid, Eid, evdate, status);
+                                        if(b)
+                                        {
+                                            System.out.println("Attendance has been successfully marked....");
+                                            System.out.println(" ");
+                                        }
+                                        else
+                                        {
+                                            System.out.println("Attendance has not been marked.....");
+                                            System.out.println(" ");
+                                        }
                                         break;
                                             case 7:
-                                            System.out.println("7.View all the ALumni Details as per Event:");
+                                            System.out.println("7.View all Present Alumni details....");
+                                            System.out.println(" ");
+                                            xyz.nextLine(); //Consuming newline character
+                                            System.out.println("Enter the Attendance Status you want to see:");
+                                            status = xyz.nextLine();
+                                            atm.setstatus(status);
+                                            v1 = atservice.getpresentAlumni(atm);
+                                            if(v1!=null)
+                                            {
+                                                System.out.println("Present Alumni are present in database......");
+                                                System.out.println(" ");
+                                                for(AttendanceModel atmodel : v1)
+                                                {
+                                                    System.out.println(atmodel.getAlumniMasterModel().getname() + " " + atmodel.getEventMasterModel().getname() + " " 
+                                                    + atmodel.getEventMasterModel().getDate() + " " + atmodel.getstatus());
+                                                    System.out.println(" ");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                System.out.println("There is some problem......");
+                                                System.out.println(" ");
+                                            }
+                                            break;
+                                            case 8:
+                                            System.out.println("8.View all the Alumni Details as per Event:");
                                             System.out.println(" ");
                                             xyz.nextLine();  //Consuming newline character
                                             System.out.println("Enter the Event Name:");
@@ -346,21 +392,6 @@ public class ClientApplication
                                                         case 11:
                                                         System.out.println("11.Find Most Senior Alumni in the Meet.....");
                                                         System.out.println(" ");
-                                                        // v = ams.getsenioralumni();
-                                                        // if(v!=null)
-                                                        // {
-                                                        //     System.out.println("Details regarding Senior Alumni in the Meet are as Follows....");
-                                                        //     for(AlumniMasterModel amd : v)
-                                                        //     {
-                                                        //         System.out.println(amd.getname() + " " + amd.getAge() + " " + amd.getCompany());
-                                                        //         System.out.println(" ");
-                                                        //     }
-                                                        // }
-                                                        // else
-                                                        // {
-                                                        //     System.out.println("There is some issue in Database...");
-                                                        //     System.out.println(" ");
-                                                        // }
                                                         break;
             }
         }while(true);
