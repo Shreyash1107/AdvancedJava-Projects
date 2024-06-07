@@ -34,11 +34,11 @@ public class AlumniMasterService
         int b = amrepo.deleid(am);
         return b;
     }
-    // public Vector<AlumniMasterModel> getsenioralumni()
-    // {
-    //     Vector<AlumniMasterModel> v = amrepo.getsenioralumni();
-    //     return v;
-    // }
+    public Vector<AlumniMasterModel> getsenioralumni()
+    {
+        Vector<AlumniMasterModel> v = amrepo.getsenioralumni();
+        return v;
+    }
     public Vector<AlumniMasterModel> sortyearwisealumni()
     {
         Vector<AlumniMasterModel> v = amrepo.sortyearwisealumni();

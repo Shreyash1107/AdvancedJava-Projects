@@ -8,9 +8,9 @@ import org.repository.Attendancerepository;
 public class Attendanceservice 
 {
     Attendancerepository atrepo = new Attendancerepository();
-    public boolean isAttendancemarked(int Bid,int Eid,String date,String status)
+    public boolean isAttendancemarked(int Aid,int Eid,String date,String status)
     {
-        boolean b = atrepo.isAttendancemarked(Bid, Eid, date, status);
+        boolean b = atrepo.isAttendancemarked(Aid, Eid, date, status);
         return b;
     }
     public Vector<AttendanceModel> getpresentAlumni(AttendanceModel atm)

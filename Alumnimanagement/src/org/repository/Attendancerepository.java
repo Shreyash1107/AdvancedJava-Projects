@@ -10,12 +10,12 @@ import org.model.EventMasterModel;
 public class Attendancerepository extends DBHelper
 {
     Vector<AttendanceModel>vect = null;
-    public boolean isAttendancemarked(int Bid,int Eid,String date,String status)
+    public boolean isAttendancemarked(int Aid,int Eid,String date,String status)
     {
         try
         {
             pstmt = conn.prepareStatement("insert into Attendance values(?,?,?,?)");
-            pstmt.setInt(1, Bid);
+            pstmt.setInt(1, Aid);
             pstmt.setInt(2, Eid);
             pstmt.setString(3, date);
             pstmt.setString(4, status);
@@ -34,7 +34,7 @@ public class Attendancerepository extends DBHelper
         try
         {
             // AttendanceModel atm = new AttendanceModel();
-            pstmt = conn.prepareStatement("select am.Name as Alumni_Name,em.name as Event_name,em.date as Date,a.status as Status from Attendance a inner join EventMaster em on a.Eid=em.Eid inner join AlumniMaster am on am.Bid = a.Bid where a.status =?");
+            pstmt = conn.prepareStatement(" select am.name as Alumni_name,em.name as Event_Name,a.evdate as Date,a.status as status from AlumniMaster am inner join Attendance a on am.Aid = a.Aid inner join EventMaster em on em.Eid = a.Eid where a.status = ?");
             pstmt.setString(1,atm.getstatus());
             rs = pstmt.executeQuery();
             while(rs.next())

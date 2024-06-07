@@ -298,8 +298,8 @@ public class ClientApplication
                                         case 6:
                                         System.out.println("6.Take Attendance of Alumni.....");
                                         System.out.println(" ");
-                                        System.out.println("Enter the Batch Id:");
-                                        Bid = xyz.nextInt();
+                                        System.out.println("Enter the Alumni Id:");
+                                        Aid = xyz.nextInt();
                                         System.out.println("Enter the Event Id:");
                                         Eid = xyz.nextInt();
                                         xyz.nextLine();  //Consuming newline character
@@ -307,7 +307,7 @@ public class ClientApplication
                                         evdate = xyz.nextLine();
                                         System.out.println("Enter P if you are present otherwise if you are not Present then Enter A");
                                         status = xyz.nextLine();
-                                        b = atservice.isAttendancemarked(Bid, Eid, evdate, status);
+                                        b = atservice.isAttendancemarked(Aid, Eid, evdate, status);
                                         if(b)
                                         {
                                             System.out.println("Attendance has been successfully marked....");
@@ -392,6 +392,22 @@ public class ClientApplication
                                                         case 11:
                                                         System.out.println("11.Find Most Senior Alumni in the Meet.....");
                                                         System.out.println(" ");
+                                                        v = ams.getsenioralumni();
+                                                        if(v!=null)
+                                                        {
+                                                            System.out.println("Most Senior Alumnis are present in database.....");
+                                                            System.out.println(" ");
+                                                            for(AlumniMasterModel amd : v)
+                                                            {
+                                                                System.out.println(amd.getBatchMasterModel().getBatch_name() + " " + amd.getname() + " " + amd.getCompany());
+                                                                System.out.println(" ");
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            System.out.println("There is some issue....");
+                                                            System.out.println(" ");
+                                                        }
                                                         break;
             }
         }while(true);
