@@ -409,7 +409,10 @@ public class ClientApplication
                                                             System.out.println(" ");
                                                         }
                                                         break;
+                                                            default:
+                                                            System.out.println("Invalid Choice....");
+                                                            break;
             }
-        }while(true);
+        }while(choice!=12);
     }
 }
