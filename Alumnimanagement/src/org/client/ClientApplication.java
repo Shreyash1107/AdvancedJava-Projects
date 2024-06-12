@@ -4,23 +4,26 @@ import org.model.AlumniMasterModel;
 import org.model.AttendanceModel;
 import org.model.BatchMasterModel;
 import org.model.EventMasterModel;
+import org.model.FeedbackMasterModel;
 import org.service.AlumniEventService;
 import org.service.AlumniMasterService;
 import org.service.Attendanceservice;
 import org.service.BatchMasterService;
 import org.service.EventmasterService;
+import org.service.FeedbackMasterService;
 public class ClientApplication 
 {
     public static void main(String args[])
     {
         int choice;
         int flag;
-        String Batch_name,Subject,evdate,status;
-        boolean b;
-        int Aid,Bid,Age,Eid;
+        String Batch_name,Subject,evdate,status,details;
+        boolean b,b1;
+        int Aid,Bid,Age,Eid,Rating;
         Vector <AlumniMasterModel> v = new Vector<AlumniMasterModel>();
         Vector <EventMasterModel> vect = new Vector<EventMasterModel>();
         Vector <AttendanceModel> v1 = new Vector<AttendanceModel>();
+        Vector <FeedbackMasterModel> v2 = new Vector<FeedbackMasterModel>();
         String Name,Email,Contact,Company,Venue,Time,date;
         BatchMasterModel bm = new BatchMasterModel();
         BatchMasterService bs = new BatchMasterService();
@@ -31,6 +34,8 @@ public class ClientApplication
         AlumniEventService aservice = new AlumniEventService(); 
         AttendanceModel atm = new AttendanceModel();
         Attendanceservice atservice = new  Attendanceservice(); 
+        FeedbackMasterModel fm = new FeedbackMasterModel();
+        FeedbackMasterService fms = new FeedbackMasterService(); 
         Scanner xyz = new Scanner(System.in);
         do
         {
@@ -43,8 +48,9 @@ public class ClientApplication
             System.out.println("7.View All Present/Absent Alumni in the Event.... ");
             System.out.println("8.View all Alumni Details as Per Event....");
             System.out.println("9.Take Feedback from Alumni....");
-            System.out.println("10.Sort Alumni Year Wise....");
-            System.out.println("11.Find the Most Senior Alumni in Meet....");
+            System.out.println("10.Display Feedback given by Alumni for Event.....");
+            System.out.println("11.Sort Alumni Year Wise....");
+            System.out.println("12.Find the Most Senior Alumni in Meet....");
             System.out.println(" ");
             System.out.println("Enter the choice:");
             choice = xyz.nextInt();
@@ -367,9 +373,72 @@ public class ClientApplication
                                             }
                                             break;
                                                 case 9:
+                                                System.out.println("9.Take Feedback from Alumni......");
+                                                System.out.println(" ");
+                                                System.out.println("Enter the Alumni Id:");
+                                                Aid = xyz.nextInt();
+                                                System.out.println("Enter the Event Id:");
+                                                Eid = xyz.nextInt();
+                                                xyz.nextLine();  //Consuming newline character
+                                                System.out.println("Enter the Feedback in detail:");
+                                                details = xyz.nextLine();
+                                                System.out.println("Enter the Rating(1-5):");
+                                                Rating = xyz.nextInt();
+                                                xyz.nextLine();    //Consuming newline Character
+                                                System.out.println("Enter the Date of Event for Feedback:");
+                                                date = xyz.nextLine();
+                                                System.out.println("Enter the Status:");
+                                                status = xyz.nextLine();
+                                                b = atservice.isAttendancemarked(Aid, Eid, date, status);
+                                                if(b)
+                                                {
+                                                    System.out.println("Alumni are present for Event:");
+                                                    System.out.println(" ");
+                                                    fm.setdetails(details);
+                                                    fm.setRating(Rating);
+                                                    fm.setEid(Eid);
+                                                    fm.setAid(Aid);;
+                                                    atm.setstatus(status);
+                                                    b1 = fms.isFeedbackadded(fm,atm);
+                                                    if(b1)
+                                                    {
+                                                        System.out.println("Feedback has been given by Almuni......");
+                                                        System.out.println(" ");
+                                                    }
+                                                    else
+                                                    {
+                                                        System.out.println("Feedback has not been given.......");
+                                                        System.out.println(" ");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    System.out.println("Abesnt Alumni will not be able to give feedback.....");
+                                                    System.out.println(" ");
+                                                }
                                                 break;
                                                     case 10:
-                                                    System.out.println("10.Sort the Alumni Details Year-Wise.....");
+                                                    System.out.println("10.Display Feedback given by Alumni.....");
+                                                    System.out.println(" ");
+                                                	v2 = fms.getfeedback();
+                                                    if(v2!=null)
+                                                    {
+                                                        System.out.println("Alumni who have given the Feedback are there in database.....");
+                                                        System.out.println(" ");
+                                                        for(FeedbackMasterModel fdm : v2)
+                                                        {
+                                                            System.out.println(fdm.getAlumniMasterModel().getname() + " " + fdm.getEventMasterModel().getname() + " "  + fdm.getdetails() + " " + fdm.getRating());
+                                                            System.out.println(" ");
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        System.out.println("No Alumni Present for Event so no Feedback received....");
+                                                        System.out.println(" ");
+                                                    }
+                                                    break;
+                                                    case 11:
+                                                    System.out.println("11.Sort the Alumni Details Year-Wise.....");
                                                     System.out.println(" ");
                                                     v = ams.sortyearwisealumni();
                                                     if(v!=null)
@@ -389,8 +458,8 @@ public class ClientApplication
                                                         System.out.println(" ");
                                                     }
                                                     break;
-                                                        case 11:
-                                                        System.out.println("11.Find Most Senior Alumni in the Meet.....");
+                                                        case 12:
+                                                        System.out.println("12.Find Most Senior Alumni in the Meet.....");
                                                         System.out.println(" ");
                                                         v = ams.getsenioralumni();
                                                         if(v!=null)
@@ -410,9 +479,9 @@ public class ClientApplication
                                                         }
                                                         break;
                                                             default:
-                                                            System.out.println("Invalid Choice....");
+                                                            System.out.println("\t\t\t\t\t\t**************Thank You******************\t\t\t\t\t\t");
                                                             break;
             }
-        }while(choice!=12);
+        }while(choice!=13);
     }
 }
