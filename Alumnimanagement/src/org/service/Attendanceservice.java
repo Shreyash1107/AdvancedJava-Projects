@@ -13,6 +13,11 @@ public class Attendanceservice
         boolean b = atrepo.isAttendancemarked(Aid, Eid, date, status);
         return b;
     }
+    public String getattendancestatus(int Aid,int Eid)
+    {
+        String status = atrepo.getattendancestatus(Aid, Eid);
+        return status;
+    }
     public Vector<AttendanceModel> getpresentAlumni(AttendanceModel atm)
     {
         Vector<AttendanceModel> vect = atrepo.getpresentAlumni(atm);

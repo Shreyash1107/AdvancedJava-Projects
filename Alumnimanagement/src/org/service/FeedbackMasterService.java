@@ -8,13 +8,17 @@ import org.repository.FeedbackMasterrepository;
 public class FeedbackMasterService 
 {
     FeedbackMasterrepository fmrepo = new FeedbackMasterrepository();
-    public boolean isFeedbackadded(FeedbackMasterModel fm,AttendanceModel atm)
+    // public boolean isFeedbackadded(FeedbackMasterModel fm,AttendanceModel atm)
+    // {
+    //     if(atm!=null && "P".equalsIgnoreCase(atm.getstatus()))
+    //     {
+    //         return fmrepo.isFeedbackadded(fm);
+    //     }
+    //     return false;
+    // }
+    public boolean isFeedbackadded(FeedbackMasterModel fm)
     {
-        if(atm!=null && "P".equalsIgnoreCase(atm.getstatus()))
-        {
-            return fmrepo.isFeedbackadded(fm);
-        }
-        return false;
+        return fmrepo.isFeedbackadded(fm);
     }
     public Vector<FeedbackMasterModel> getfeedback()
     {

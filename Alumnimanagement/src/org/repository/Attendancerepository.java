@@ -1,5 +1,8 @@
 package org.repository;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import org.config.DBHelper;
@@ -27,6 +30,26 @@ public class Attendancerepository extends DBHelper
             System.out.println("Error is " + ex);
         }
         return false;
+    }
+    public String getattendancestatus(int Aid,int Eid)
+    {
+        String status = null;
+        try
+        {
+            pstmt = conn.prepareStatement("select status from Attendance where Aid = ? and Eid = ?");
+            pstmt.setInt(1, Aid);
+            pstmt.setInt(2, Eid);
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                status = rs.getString(1);
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Error is " + ex);
+        }
+        return status;
     }
     public Vector<AttendanceModel> getpresentAlumni(AttendanceModel atm)
     {

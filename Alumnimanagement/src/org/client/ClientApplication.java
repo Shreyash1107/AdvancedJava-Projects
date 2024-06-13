@@ -373,50 +373,83 @@ public class ClientApplication
                                             }
                                             break;
                                                 case 9:
-                                                System.out.println("9.Take Feedback from Alumni......");
+                                                System.out.println("9. Take Feedback from Alumni......");
                                                 System.out.println(" ");
-                                                System.out.println("Enter the Alumni Id:");
+                                                System.out.println("Enter the Alumni's Id:");
                                                 Aid = xyz.nextInt();
                                                 System.out.println("Enter the Event Id:");
                                                 Eid = xyz.nextInt();
                                                 xyz.nextLine();  //Consuming newline character
                                                 System.out.println("Enter the Feedback in detail:");
                                                 details = xyz.nextLine();
-                                                System.out.println("Enter the Rating(1-5):");
+                                                System.out.println("Enter the Rating for Event:");
                                                 Rating = xyz.nextInt();
-                                                xyz.nextLine();    //Consuming newline Character
-                                                System.out.println("Enter the Date of Event for Feedback:");
-                                                date = xyz.nextLine();
-                                                System.out.println("Enter the Status:");
-                                                status = xyz.nextLine();
-                                                b = atservice.isAttendancemarked(Aid, Eid, date, status);
-                                                if(b)
+                                                status = atservice.getattendancestatus(Aid, Eid);
+                                                if("P".equalsIgnoreCase(status))
                                                 {
-                                                    System.out.println("Alumni are present for Event:");
+                                                    System.out.println("Alumni are present for Event.....");
                                                     System.out.println(" ");
+                                                    fm.setAid(Aid);
+                                                    fm.setEid(Eid);
                                                     fm.setdetails(details);
                                                     fm.setRating(Rating);
-                                                    fm.setEid(Eid);
-                                                    fm.setAid(Aid);;
-                                                    atm.setstatus(status);
-                                                    b1 = fms.isFeedbackadded(fm,atm);
+                                                    // atm.setstatus(status);
+                                                    b1 = fms.isFeedbackadded(fm);
                                                     if(b1)
                                                     {
-                                                        System.out.println("Feedback has been given by Almuni......");
+                                                        System.out.println("Feedback given by Alumni.....");
                                                         System.out.println(" ");
                                                     }
                                                     else
                                                     {
-                                                        System.out.println("Feedback has not been given.......");
+                                                        System.out.println("There is some Problem....");
                                                         System.out.println(" ");
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    System.out.println("Abesnt Alumni will not be able to give feedback.....");
+                                                    System.out.println("Absent alumni will not be able to give feedback.....");
                                                     System.out.println(" ");
                                                 }
                                                 break;
+                                                // xyz.nextLine();  //Consuming newline character
+                                                // System.out.println("Enter the Feedback in detail:");
+                                                // details = xyz.nextLine();
+                                                // System.out.println("Enter the Rating(1-5):");
+                                                // Rating = xyz.nextInt();
+                                                // xyz.nextLine();    //Consuming newline Character
+                                                // System.out.println("Enter the Date of Event for Feedback:");
+                                                // date = xyz.nextLine();
+                                                // System.out.println("Enter the Status:");
+                                                // status = xyz.nextLine();
+                                                // b = atservice.isAttendancemarked(Aid, Eid, date, status);
+                                                // if(b)
+                                                // {
+                                                //     System.out.println("Alumni are present for Event:");
+                                                //     System.out.println(" ");
+                                                //     fm.setdetails(details);
+                                                //     fm.setRating(Rating);
+                                                //     fm.setEid(Eid);
+                                                //     fm.setAid(Aid);;
+                                                //     atm.setstatus(status);
+                                                //     b1 = fms.isFeedbackadded(fm,atm);
+                                                //     if(b1)
+                                                //     {
+                                                //         System.out.println("Feedback has been given by Almuni......");
+                                                //         System.out.println(" ");
+                                                //     }
+                                                //     else
+                                                //     {
+                                                //         System.out.println("Feedback has not been given.......");
+                                                //         System.out.println(" ");
+                                                //     }
+                                                // }
+                                                // else
+                                                // {
+                                                //     System.out.println("Abesnt Alumni will not be able to give feedback.....");
+                                                //     System.out.println(" ");
+                                                // }
+                                                // break;
                                                     case 10:
                                                     System.out.println("10.Display Feedback given by Alumni.....");
                                                     System.out.println(" ");

@@ -14,26 +14,19 @@ public class FeedbackMasterrepository extends DBHelper
     {
         try
         {
-            pstmt = conn.prepareStatement("insert into FeedbackMaster values('0',?,?,?,?)");
-            pstmt.setString(1, fm.getdetails());
-            pstmt.setInt(2, fm.getRating());
-            pstmt.setInt(3, fm.getEid());
-            pstmt.setInt(4, fm.getAid());
-            int val = pstmt.executeUpdate();
-            if(val>0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            pstmt = conn.prepareStatement("insert into FeedbackMaster values(?,?,?,?)");
+            pstmt.setInt(1, fm.getAid());
+            pstmt.setInt(2, fm.getEid());
+            pstmt.setString(3, fm.getdetails());
+            pstmt.setInt(4, fm.getRating());
+            // pstmt.executeUpdate();
+            return pstmt.executeUpdate()>0?true:false;
         }
         catch(Exception ex)
         {
             System.out.println("Error is " + ex);
-            return false;
         }
+        return false;
     }
     public Vector<FeedbackMasterModel> getfeedback()
     {

@@ -1,7 +1,6 @@
 package org.model;
 public class FeedbackMasterModel 
 {
-    private int Fid;
     private String details;
     private int Rating;
     int Aid;
@@ -14,21 +13,12 @@ public class FeedbackMasterModel
     }
     public FeedbackMasterModel(int Fid,String details,int Rating,int Aid,int Eid,AlumniMasterModel am,EventMasterModel em)
     {
-        this.Fid = Fid;
         this.details = details;
         this.Rating = Rating;
         this.Aid = Aid;
         this.Eid = Eid;
         this.am = am;
         this.em = em;
-    }
-    public void setFid(int Fid)
-    {
-        this.Fid = Fid;
-    }
-    public int getFid()
-    {
-        return Fid;
     }
     public void setdetails(String details)
     {
