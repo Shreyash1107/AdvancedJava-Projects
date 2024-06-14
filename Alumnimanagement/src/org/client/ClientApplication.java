@@ -1,5 +1,7 @@
 package org.client;
 import java.util.*;
+
+import org.helper.EmailHelper;
 import org.model.AlumniMasterModel;
 import org.model.AttendanceModel;
 import org.model.BatchMasterModel;
@@ -17,7 +19,7 @@ public class ClientApplication
     {
         int choice;
         int flag;
-        String Batch_name,Subject,evdate,status,details;
+        String Batch_name,Subject,evdate,status,details,sender,emailsub,emailcont;
         boolean b,b1;
         int Aid,Bid,Age,Eid,Rating;
         Vector <AlumniMasterModel> v = new Vector<AlumniMasterModel>();
@@ -43,7 +45,7 @@ public class ClientApplication
             System.out.println("2.Add new Alumni/View Alumni/Update Alumni/Delete Alumni......");
             System.out.println("3.Add New Alumni Event.....");
             System.out.println("4.View all the Alumni Events....");
-            System.out.println("5.Send SMS to Alumni for Event....");
+            System.out.println("5.Send SMS/Email to Alumni for Event....");
             System.out.println("6.Take Attendance of Alumni.....");
             System.out.println("7.View All Present/Absent Alumni in the Event.... ");
             System.out.println("8.View all Alumni Details as Per Event....");
@@ -300,6 +302,32 @@ public class ClientApplication
                                 }
                                 break;
                                     case 5:
+                                    System.out.println("5.Send SMS/Email to Alumni for Event......");
+                                    System.out.println(" ");
+                                    xyz.nextLine();  //Consuming newline character
+                                    System.out.println("Enter the Sender name:");
+                                    sender = xyz.nextLine();
+                                    System.out.println("Enter the Email Subject:");
+                                    emailsub = xyz.nextLine();
+                                    System.out.println("Enter the Email Content");
+                                    emailcont = xyz.nextLine();
+                                    // EmailHelper.sendEmail("Shreyash", "shreyunkawane@gmail.com", "Shreyas", "Invitation for Alumni Event", "We have organized Cultutral Event, So you are Inivited");
+                                    v = ams.getalumni();
+                                    if(v!=null)
+                                    {
+                                        System.out.println("Alumni are present in database.....");
+                                        System.out.println(" ");
+                                        for(AlumniMasterModel amd : v)
+                                        {
+                                            EmailHelper.sendEmail(sender,amd.getEmail(),amd.getname(),emailsub,emailcont);
+                                            System.out.println(" ");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        System.out.println("Alumnis are not in Database.....");
+                                        System.out.println(" ");
+                                    }
                                     break;
                                         case 6:
                                         System.out.println("6.Take Attendance of Alumni.....");
